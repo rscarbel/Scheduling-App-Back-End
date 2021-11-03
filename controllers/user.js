@@ -4,11 +4,11 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const isAuthenticated = require ('../bin/isAuthenticated');
 
-const setSessionProperties = (model) => {
-  req.session.user = model._id;
-  req.session.company = model.companyName;
-  req.session.firstName = model.firstName;
-  req.session.lastName = model.lastName;
+const setSessionProperties = (session, model) => {
+  session.user = model._id;
+  session.company = model.companyName;
+  session.firstName = model.firstName;
+  session.lastName = model.lastName;
 }
 
 router.post ('/login', (req,res) => {
@@ -16,7 +16,7 @@ router.post ('/login', (req,res) => {
     if (foundUser) {
       const passwordMatched = bcrypt.compareSync(req.body.password,foundUser.password);
       if (passwordMatched) {
-        setSessionProperties(foundUser)
+        setSessionProperties(req.session, foundUser)
       } else {
         res.send('Invalid username or password')
       }
@@ -27,13 +27,16 @@ router.post ('/login', (req,res) => {
 });
 
 router.post('/signup',(req,res) => {
-  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+  if (req.body.password) {
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  }
 
   User.create (req.body, (err, newUser) => {
     if (err) {
       res.send(err.code === 11000 ? {error: 'Email must be unique'} : {error: 'Something went wrong.'});
     } else {
-      setSessionProperties(newUser)
+      setSessionProperties(req.session, newUser)
       res.send('Account successfully created.')
     }
   })
