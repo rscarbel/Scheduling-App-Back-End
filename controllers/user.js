@@ -12,16 +12,17 @@ const setSessionProperties = (session, model) => {
 }
 
 router.post ('/login', (req,res) => {
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  User.findOne({ email: req.body.email }, (err, foundUser) => {
     if (foundUser) {
-      const passwordMatched = bcrypt.compareSync(req.body.password,foundUser.password);
+      const passwordMatched = bcrypt.compareSync(req.body.password, foundUser.password);
       if (passwordMatched) {
         setSessionProperties(req.session, foundUser)
+        res.send({success: 'successfully logged in'})
       } else {
-        res.send('Invalid username or password')
+        res.send({error: 'Invalid username or password'})
       }
     } else {
-      res.send('Invalid username or password')
+      res.send({error: 'Invalid username or password'})
     }
   })
 });
@@ -43,7 +44,12 @@ router.post('/signup',(req,res) => {
 })
 
 router.get('/logout',(req,res) => {
-  req.session.destroy()
+  if (req.session.user) {
+    req.session.destroy()
+    res.send({success: 'Successfully logged out.'})
+  } else {
+    res.send({error: 'Already logged out.'})
+  }
 })
 
 module.exports = router;
