@@ -31,9 +31,15 @@ router.post('/signup',(req,res) => {
 
   User.create (req.body, (err, newUser) => {
     if (err) {
-      res.send(err.code === 11000 ? 'Email must be unique' : 'Something went wrong');
+      res.send(err.code === 11000 ? {error: 'Email must be unique'} : {error: 'Something went wrong.'});
     } else {
       setSessionProperties(newUser)
     }
   })
 })
+
+router.get('/logout',(req,res) => {
+  req.session.destroy()
+})
+
+module.exports = router;
