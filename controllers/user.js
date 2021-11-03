@@ -27,13 +27,14 @@ router.post ('/login', (req,res) => {
 });
 
 router.post('/signup',(req,res) => {
-  req.body.password = bcrypt.hashSync(req.body.password,bcrypt.genSalt(10));
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
   User.create (req.body, (err, newUser) => {
     if (err) {
       res.send(err.code === 11000 ? {error: 'Email must be unique'} : {error: 'Something went wrong.'});
     } else {
       setSessionProperties(newUser)
+      res.send('Account successfully created.')
     }
   })
 })
