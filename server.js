@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const expressSession = require('express-session');
+const userController = require('./controllers/user')
 require('dotenv').config();
 
 const app = express();
@@ -20,6 +21,8 @@ app.use(expressSession({
   resave: false,
   saveUnitialized: false
 }));
+
+app.use('/',userController);
 
 const PORT = process.env.PORT || 80;
 app.listen({PORT, () => {
