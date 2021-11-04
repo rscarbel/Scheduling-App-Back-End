@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const {Schema, model} = require('mongoose');
 
 const userSchema = new Schema({
   email: {type: String, unique: true, required: true, maxLength: 320},
@@ -9,27 +8,47 @@ const userSchema = new Schema({
   companyName: {type: String, required: true, maxLength: 320},
   position: {type: String, maxLength: 320},
   phone: {type: Number},
-  /*
-  Each index of the available hours corrosponds with a day of the week (sunday-saturday)
 
-  Each "day" is comprised of a sub array with two numbers, each between 0 and 1440.
-
-  The numbers corrospond to minutes in a day.
-  The first number is the starting availablility time, and the second number is the ending availability time.
-  */
-  availableHours: [
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-    [{type: Number, min:0, max:1440},{type: Number, min:0, max:1440}],
-  ],
+  //The numbers in the available hours correspond to minutes in a day.
+  availableHours: {
+    sunday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    monday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    tuesday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    wednesday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    thursday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    friday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    },
+    saturday: {
+      start: {type: Number, min:0, max:1440, default: 0},
+      end: {type: Number, min:0, max:1440, default: 0}
+    }
+  },
+  requestedDaysOff: Array,
+  approvedDaysOff: Array,
+  shiftsToDate: {type: Number, default: 0},
+  lateCount: {type: Number, default: 0},
+  absentCount: {type: Number, default: 0},
   loginHistory: {type:Array},
   isAdmin: {type: Boolean, default: false, immutable: true}
 }, {
   timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = model('User', userSchema);
