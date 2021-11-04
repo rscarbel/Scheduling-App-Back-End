@@ -12,7 +12,7 @@ const setSessionProperties = (session, model) => {
   session.isAdmin = model.isAdmin;
 }
 
-router.get('/api/employees', (req, res) () => {
+router.get('/api/employees', (req, res) => {
   res.send('howdy!')
 })
 
