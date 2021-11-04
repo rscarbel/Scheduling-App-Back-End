@@ -2,7 +2,7 @@ const utils = {
 
   //Produces hh/mm mm/dd/yyyy timestamp
   //Uses am & pm instead of military time
-  currentTimestamp: function(date=new Date()) {
+  timestamp: function(date = new Date()) {
     //helper to adjust single-digit values
     function twoCharacters(value) {
       if (value.toString().length === 1) {
@@ -12,8 +12,10 @@ const utils = {
     }
     let m = 'am'
 
-    let month = twoCharacters(date.getMonth());
-    let day = twoCharacters(date.getDay());
+    let month = date.getMonth();
+    month++
+    month = twoCharacters(month)
+    let day = twoCharacters(date.getDate());
     let year = date.getFullYear();
     let hour = date.getHours ();
     if (hour === 0) {
