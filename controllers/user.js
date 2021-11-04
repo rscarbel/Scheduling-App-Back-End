@@ -12,6 +12,10 @@ const setSessionProperties = (session, model) => {
   session.isAdmin = model.isAdmin;
 }
 
+router.get('/api/employees', (req, res) () => {
+  res.send('howdy!')
+})
+
 router.post ('/login', (req,res) => {
   User.findOne({ email: req.body.email }, (err, foundUser) => {
     if (foundUser) {
