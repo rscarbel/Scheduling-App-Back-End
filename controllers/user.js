@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const utils = require('../bin/utils')
+const { timestamp } = require('../bin/utils')
 
 const setSessionProperties = (session, model) => {
   session.user = model._id;
@@ -18,7 +18,7 @@ router.post ('/login', (req,res) => {
       const passwordMatched = bcrypt.compareSync(req.body.password, foundUser.password);
       if (passwordMatched) {
         setSessionProperties(req.session, foundUser);
-        foundUser.loginHistory.push(utils.currentTimestamp())
+        foundUser.loginHistory.push(timestamp())
         foundUser.save()
         res.send({
           success: 'successfully logged in',
