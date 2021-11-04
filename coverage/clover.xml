@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636037259032" clover="3.2.0">
-  <project timestamp="1636037259033" name="All files">
-    <metrics statements="20" coveredstatements="17" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2" elements="29" coveredelements="24" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+<coverage generated="1636040036673" clover="3.2.0">
+  <project timestamp="1636040036673" name="All files">
+    <metrics statements="24" coveredstatements="21" conditionals="9" coveredconditionals="7" methods="3" coveredmethods="3" elements="36" coveredelements="31" complexity="0" loc="24" ncloc="24" packages="1" files="2" classes="2"/>
+    <file name="isAuthenticated.js" path="C:\Users\ryans\Documents\employee_scheduling\Scheduling-App-Back-End\bin\isAuthenticated.js">
+      <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <line num="2" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+    </file>
     <file name="utils.js" path="C:\Users\ryans\Documents\employee_scheduling\Scheduling-App-Back-End\bin\utils.js">
       <metrics statements="20" coveredstatements="17" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
