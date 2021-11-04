@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1636044763867" clover="3.2.0">
-  <project timestamp="1636044763867" name="All files">
+<coverage generated="1636045038395" clover="3.2.0">
+  <project timestamp="1636045038396" name="All files">
     <metrics statements="24" coveredstatements="24" conditionals="9" coveredconditionals="9" methods="3" coveredmethods="3" elements="36" coveredelements="36" complexity="0" loc="24" ncloc="24" packages="1" files="2" classes="2"/>
     <file name="isAuthenticated.js" path="C:\Users\ryans\Documents\employee_scheduling\Scheduling-App-Back-End\bin\isAuthenticated.js">
       <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
